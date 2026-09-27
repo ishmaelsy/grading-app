@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <title>React Basics</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+
+      function getGradeResult(score) {
+        if (score === "") return null;
+
+        const num = Number(score);
+        if (num >= 70) {
+          return (
+            <>
+              <p>Grade: A</p>
+              <p>Excellent, you are the best</p>
+              <p>Status: Pass</p>
+            </>
+          );
+        } else if (num >= 60) {
+          return (
+            <>
+              <p>Grade: B</p>
+              <p>Very Good, among the best</p>
+              <p>Status: Pass</p>
+            </>
+          );
+        } else if (num >= 50) {
+          return (
+            <>
+              <p>Grade: C</p>
+              <p>Good, keep it up</p>
+              <p>Status: Pass</p>
+            </>
+          );
+        } else if (num >= 40) {
+          return (
+            <>
+              <p>Grade: D</p>
+              <p>Pass, could do better</p>
+              <p>Status: Pass</p>
+            </>
+          );
+        } else {
+          return (
+            <>
+              <p>Grade: F</p>
+              <p>Poor, you better sit up</p>
+              <p>Status: Failed</p>
+            </>
+          );
+        }
+      }
+
+      function GradeApp() {
+        const [inputValue, setInputValue] = React.useState("");
+        const [submittedScore, setSubmittedScore] = React.useState("");
+
+        return (
+          <>
+            <input
+              placeholder="Enter your score here"
+              type="number"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button onClick={() => setSubmittedScore(inputValue)}>
+              Show Grade
+            </button>
+
+            <div style={{ marginTop: "20px" }}>
+              {getGradeResult(submittedScore)}
+            </div>
+          </>
+        );
+      }
+
+      root.render(<GradeApp />);
+    </script>
+  </body>
+</html>
